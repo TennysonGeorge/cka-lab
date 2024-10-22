@@ -9,3 +9,54 @@ spec:
   resources:
     requests:
       storage: 10Gi
+
+## add a pods as below 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+  volumes:
+  - name: my-pvc
+    persistentVolumeClaim:
+      claimName: my-pvc
+
+
+
+
+      apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  namespace: web-tier
+  labels:
+    app: my-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 8080
+        resources: {}
+
+
+
+## what wrong with this command below to create a service account pod 
+kubectl create serviceaccount my-serviceaccount --namespace=my-namespace --dry-run=client -o yaml | kubectl apply -f -
+

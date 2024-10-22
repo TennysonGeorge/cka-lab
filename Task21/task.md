@@ -2,9 +2,10 @@ A Kubernetes worker node, labelled with name "node-01" is in state NotReady . 
 
 ```
 $ kubectl get nodes
+kubectl describe node-01
 $ ssh node-01
 $ sudo -i
-$ systemctl status kubelet
-$ systemctl start kubelet
-$ systemctl enable kubelet
+$ systemctl status kubelet ## checking the kubelet agent on the worker node 
+$ systemctl start kubelet ## starting the kubelet on the worker node
+$ systemctl enable kubelet 
 ```

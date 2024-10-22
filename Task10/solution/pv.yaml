@@ -9,3 +9,18 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/path/to/file"
+
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-vol
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/path/to/file"

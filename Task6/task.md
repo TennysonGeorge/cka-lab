@@ -9,4 +9,51 @@ NB: There will be a default deny all from any namespace netpol will be already p
 
 
 
-____WORKINPROGESS!!!!
+____WORKINPROGESS!!!
+
+## This is me trying to get it right with out using chatgpt 
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: k8s-netpol
+  namespace: namespace-netpol
+spec: 
+    policyTypes:
+  - Ingress
+  - Egress
+        ports:
+        - protocol: TCP
+          port: 9200
+       
+
+
+## This is the correct code below
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: k8s-netpol
+  namespace: namespace-netpol
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: internal
+    ports:
+    - protocol: TCP
+      port: 9200
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: internal
+    ports:
+    - protocol: TCP
+      port: 9200
+      

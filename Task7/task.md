@@ -6,6 +6,19 @@ Do not alter the application container and verify the logs are written properly 
 looging-pod primary container logger does not write to any volumes, you need to create a volume from empty dir and mount it appropriately. 
 
 
+## Hard one, would need to come back to complete
+
+____WORKINPROGESS!!!
 
 
-____WORKINPROGESS!!!!
+kubectl run busybox --image=busybox 
+
+
+apiVersion: apps/v1
+kind: pod
+metadata:
+  name: logging-pod
+spec:
+  containers:
+    - name: logging-pod
+      image: busybox 
